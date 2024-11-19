@@ -78,7 +78,31 @@ public class Variant9 {
         return k;
     }
 
+    // Завдання 7: array
+    // Дано цілочисельний масив розміру N. Вивести всі парні числа, що містяться в цьому масиві, в порядку убування їхніх індексів, а також їхню кількість K.
+    public List<Integer> arrayTask(int[] array) {
+        List<Integer> evenNumbers = new ArrayList<>();
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] % 2 == 0) {
+                evenNumbers.add(array[i]);
+            }
+        }
+        Collections.reverse(evenNumbers);
+        return evenNumbers;
+    }
 
+    // Завдання 8: matrix
+    // Дано матрицю розміру M на N і ціле число K (K<=M OR K<=N). Вивести елементи K-го стовпця даної матриці
+    public int[] matrixTask(int[][] matrix, int k) {
+        if (k <= 0 || k > matrix[0].length) {
+            throw new IllegalArgumentException("K має бути в межах від 1 до N");
+        }
+        int[] column = new int[matrix.length];
+        for (int i = 0; i < matrix.length; i++) {
+            column[i] = matrix[i][k - 1];
+        }
+        return column;
+    }
 
     public static void main(String[] args) {
         System.out.println("Variant9 виконаний успішно!");
