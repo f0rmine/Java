@@ -1,8 +1,10 @@
 package lab0;
 
 import org.testng.annotations.Test;
-
 import static org.testng.Assert.*;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class Variant9Test {
 
@@ -32,13 +34,13 @@ public class Variant9Test {
 
     @Test
     public void testSwitchTask() {
-        assertEquals(new Variant9().switchTask(31, 12), new int[]{1, 1}); // Наступний день це 1 січня
-        assertEquals(new Variant9().switchTask(28, 2), new int[]{1, 3}); // Наступний день це 1 березня
+        assertEquals(new Variant9().caseTask(31, 12), new int[]{1, 1}); // Наступний день це 1 січня
+        assertEquals(new Variant9().caseTask(28, 2), new int[]{1, 3}); // Наступний день це 1 березня
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void testSwitchTaskInvalid() {
-        new Variant9().switchTask(32, 13); // має видати виключення для неправильної дати
+        new Variant9().caseTask(32, 13); // має видати виключення для неправильної дати
     }
 
     @Test
@@ -58,4 +60,34 @@ public class Variant9Test {
     public void testWhileTaskInvalid() {
         new Variant9().whileTask(1); // має видати виключення через n <= 1
     }
+
+    @Test
+    public void testArrayTask() {
+        assertEquals(new Variant9().arrayTask(new int[]{1, 2, 3, 4, 5, 6}), Arrays.asList(6, 4, 2)); // Парні числа в зворотньому порядку
+        assertEquals(new Variant9().arrayTask(new int[]{7, 8, 9, 10}), Arrays.asList(10, 8)); // Парні числа в зворотньому порядку
+        assertEquals(new Variant9().arrayTask(new int[]{1, 3, 5, 7}), Arrays.asList()); // Немає парних
+    }
+
+    @Test
+    public void testMatrixTask() {
+        int[][] matrix = {
+                {1, 2, 3},
+                {4, 5, 6},
+                {7, 8, 9}
+        };
+        assertEquals(new Variant9().matrixTask(matrix, 1), new int[]{1, 4, 7}); // перший стовбець
+        assertEquals(new Variant9().matrixTask(matrix, 2), new int[]{2, 5, 8}); // другий стовбець
+        assertEquals(new Variant9().matrixTask(matrix, 3), new int[]{3, 6, 9}); // третій стовбець
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void testMatrixTaskInvalid() {
+        int[][] matrix = {
+                {1, 2, 3},
+                {4, 5, 6},
+                {7, 8, 9}
+        };
+        new Variant9().matrixTask(matrix, 4); // Should throw exception for K > N
+    }
+
 }
