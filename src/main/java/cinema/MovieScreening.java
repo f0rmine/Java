@@ -1,5 +1,10 @@
 package cinema;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import java.time.LocalTime;
 import java.util.Objects;
 
@@ -11,9 +16,18 @@ public class MovieScreening implements Comparable<MovieScreening> {
     private String genre;
     private int duration; // in minutes
     private String director;
+
+    @JsonDeserialize(using = LocalTimeDeserializer.class)
+    @JsonSerialize(using = LocalTimeSerializer.class)
     private LocalTime startTime;
 
-    public MovieScreening(String title, String genre, int duration, String director, LocalTime startTime) {
+    @JsonCreator
+    public MovieScreening(
+            @JsonProperty("title") String title,
+            @JsonProperty("genre") String genre,
+            @JsonProperty("duration") int duration,
+            @JsonProperty("director") String director,
+            @JsonProperty("startTime") LocalTime startTime) {
         this.title = title;
         this.genre = genre;
         this.duration = duration;
