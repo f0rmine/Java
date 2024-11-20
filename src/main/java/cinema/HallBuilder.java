@@ -3,7 +3,7 @@ package cinema;
 import java.util.List;
 
 /**
- * Builder class for creating Hall objects.
+ * Клас конструктора для створення об'єктів Hall.
  */
 public class HallBuilder {
     private int numberOfSeats;

@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 /**
- * Represents a ticket with details such as seat number, price, date of purchase, payment method, and buyer's name.
+ * Представляє собою квиток з такими даними, як номер місця, ціна, дата придбання, спосіб оплати та ім'я покупця.
  */
 public class Ticket {
     private int seatNumber;

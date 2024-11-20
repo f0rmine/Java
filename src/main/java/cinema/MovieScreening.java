@@ -4,7 +4,7 @@ import java.time.LocalTime;
 import java.util.Objects;
 
 /**
- * Represents a movie screening with details such as title, genre, duration, director, and start time.
+ * Представляє показ фільму з такими деталями, як назва, жанр, тривалість, режисер і час початку.
  */
 public class MovieScreening {
     private String title;

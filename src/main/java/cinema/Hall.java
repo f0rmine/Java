@@ -4,14 +4,13 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Represents a hall with details such as number of seats, hall number, and amenities.
+ * Представляє зал з такими деталями, як кількість місць, номер залу та зручності.
  */
 public class Hall {
     private int numberOfSeats;
     private int hallNumber;
     private List<String> amenities;
 
-    // Package-private constructor to allow access from HallBuilder
     Hall(int numberOfSeats, int hallNumber, List<String> amenities) {
         this.numberOfSeats = numberOfSeats;
         this.hallNumber = hallNumber;
@@ -54,7 +53,6 @@ public class Hall {
         return Objects.hash(numberOfSeats, hallNumber, amenities);
     }
 
-    // Static method to get the Builder instance
     public static HallBuilder builder() {
         return new HallBuilder();
     }
