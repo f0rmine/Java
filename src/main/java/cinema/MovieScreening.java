@@ -6,7 +6,7 @@ import java.util.Objects;
 /**
  * Представляє показ фільму з такими деталями, як назва, жанр, тривалість, режисер і час початку.
  */
-public class MovieScreening {
+public class MovieScreening implements Comparable<MovieScreening> {
     private String title;
     private String genre;
     private int duration; // in minutes
@@ -67,5 +67,10 @@ public class MovieScreening {
     @Override
     public int hashCode() {
         return Objects.hash(title, genre, duration, director, startTime);
+    }
+
+    @Override
+    public int compareTo(MovieScreening other) {
+        return this.startTime.compareTo(other.startTime);
     }
 }
