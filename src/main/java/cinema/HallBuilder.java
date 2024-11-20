@@ -26,6 +26,6 @@ public class HallBuilder {
     }
 
     public Hall build() {
-        return new Hall(this);
+        return new Hall(numberOfSeats, hallNumber, amenities);
     }
 }

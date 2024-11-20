@@ -11,10 +11,11 @@ public class Hall {
     private int hallNumber;
     private List<String> amenities;
 
-    private Hall(Builder builder) {
-        this.numberOfSeats = builder.numberOfSeats;
-        this.hallNumber = builder.hallNumber;
-        this.amenities = builder.amenities;
+    // Package-private constructor to allow access from HallBuilder
+    Hall(int numberOfSeats, int hallNumber, List<String> amenities) {
+        this.numberOfSeats = numberOfSeats;
+        this.hallNumber = hallNumber;
+        this.amenities = amenities;
     }
 
     public int getNumberOfSeats() {
@@ -51,5 +52,10 @@ public class Hall {
     @Override
     public int hashCode() {
         return Objects.hash(numberOfSeats, hallNumber, amenities);
+    }
+
+    // Static method to get the Builder instance
+    public static HallBuilder builder() {
+        return new HallBuilder();
     }
 }
