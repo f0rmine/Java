@@ -16,6 +16,7 @@ dependencies {
     implementation("javax.validation:validation-api:2.0.1.Final")
     implementation("org.glassfish:javax.el:3.0.0")
     implementation("org.postgresql:postgresql:42.7.4")
+    implementation("org.slf4j:slf4j-api:1.7.36")
 }
 
 tasks.test {
