@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalTime;
+import java.util.Arrays;
+
 
 public class SerializerTest {
 
@@ -35,6 +37,7 @@ public class SerializerTest {
         Path filePath = Paths.get("movie_screening.xml");
         xmlSerializer.writeToFile(screening, filePath);
 
+
         MovieScreening deserializedScreening = xmlSerializer.readFromFile(filePath);
         System.out.println("Deserialized from XML: " + deserializedScreening);
     }
@@ -52,5 +55,38 @@ public class SerializerTest {
 
         MovieScreening deserializedScreening = yamlSerializer.readFromFile(filePath);
         System.out.println("Deserialized from YAML: " + deserializedScreening);
+    }
+
+    @Test
+    public void testHallBuilderValidation() {
+        try {
+            Hall.builder()
+                    .setNumberOfSeats(0)
+                    .setHallNumber(1)
+                    .setAmenities(Arrays.asList("AC", "3D"))
+                    .build();
+        } catch (IllegalArgumentException e) {
+            System.out.println("Caught expected exception: " + e.getMessage());
+        }
+
+        try {
+            Hall.builder()
+                    .setNumberOfSeats(100)
+                    .setHallNumber(0)
+                    .setAmenities(Arrays.asList("AC", "3D"))
+                    .build();
+        } catch (IllegalArgumentException e) {
+            System.out.println("Caught expected exception: " + e.getMessage());
+        }
+
+        try {
+            Hall.builder()
+                    .setNumberOfSeats(100)
+                    .setHallNumber(1)
+                    .setAmenities(Arrays.asList("AC", "3D", "Invalid@Amenity"))
+                    .build();
+        } catch (IllegalArgumentException e) {
+            System.out.println("Caught expected exception: " + e.getMessage());
+        }
     }
 }

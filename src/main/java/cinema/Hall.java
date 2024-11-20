@@ -1,5 +1,7 @@
 package cinema;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 import java.util.List;
 import java.util.Objects;
 
@@ -7,10 +9,16 @@ import java.util.Objects;
  * Представляє зал з такими деталями, як кількість місць, номер залу та зручності.
  */
 public class Hall {
+    @Min(value = 1, message = "Кількість місць має бути натуральним числом.")
     private int numberOfSeats;
+
+    @Min(value = 1, message = "Номер залу повинен бути натуральним числом.")
     private int hallNumber;
+
+    @Size(min = 1, message = "Список зручностей не повинен бути порожнім.")
     private List<String> amenities;
 
+    // Package-private constructor to enforce the use of the Builder
     Hall(int numberOfSeats, int hallNumber, List<String> amenities) {
         this.numberOfSeats = numberOfSeats;
         this.hallNumber = hallNumber;
@@ -53,6 +61,7 @@ public class Hall {
         return Objects.hash(numberOfSeats, hallNumber, amenities);
     }
 
+    // Static method to get the Builder instance
     public static HallBuilder builder() {
         return new HallBuilder();
     }

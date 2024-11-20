@@ -1,14 +1,17 @@
 package cinema;
 
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
+import javax.validation.ConstraintViolation;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
-/**
- * Клас конструктора для створення об'єктів Hall.
- */
 public class HallBuilder {
     private int numberOfSeats;
     private int hallNumber;
-    private List<String> amenities;
+    private List<String> amenities = new ArrayList<>();
 
     public HallBuilder setNumberOfSeats(int numberOfSeats) {
         this.numberOfSeats = numberOfSeats;
@@ -26,6 +29,20 @@ public class HallBuilder {
     }
 
     public Hall build() {
-        return new Hall(numberOfSeats, hallNumber, amenities);
+        Hall hall = new Hall(numberOfSeats, hallNumber, amenities);
+
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+        Set<ConstraintViolation<Hall>> violations = validator.validate(hall);
+
+        if (!violations.isEmpty()) {
+            List<String> validationErrors = new ArrayList<>();
+            for (ConstraintViolation<Hall> violation : violations) {
+                validationErrors.add(violation.getPropertyPath() + ": " + violation.getInvalidValue() + " - " + violation.getMessage());
+            }
+            throw new IllegalArgumentException("Validation errors: " + validationErrors);
+        }
+
+        return hall;
     }
 }
