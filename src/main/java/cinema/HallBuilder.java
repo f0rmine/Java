@@ -8,6 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Клас конструктора для створення об'єктів Hall.
+ */
+
 public class HallBuilder {
     private int numberOfSeats;
     private int hallNumber;
